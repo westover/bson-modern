@@ -1,14 +1,21 @@
 # bson-modern
 
-A modernized fork of the [bson](https://github.com/py-bson/bson) package with Python 3.12+ support.
+[![PyPI version](https://badge.fury.io/py/bson-modern.svg)](https://pypi.org/project/bson-modern/)
+[![Python versions](https://img.shields.io/pypi/pyversions/bson-modern.svg)](https://pypi.org/project/bson-modern/)
+[![Downloads](https://static.pepy.tech/badge/bson-modern)](https://pepy.tech/project/bson-modern)
+[![License](https://img.shields.io/pypi/l/bson-modern.svg)](https://github.com/westover/bson-modern/blob/main/LICENSE)
+
+A modernized fork of the [bson](https://github.com/py-bson/bson) package with Python 3.9+ support.
+
+**PyPI:** https://pypi.org/project/bson-modern/
 
 ## Why this fork?
 
-The original `bson` package has not been updated since 2018 and is incompatible with Python 3.12+ due to:
+The original `bson` package has not been updated since 2019 and is incompatible with Python 3.12+ due to:
 - Use of deprecated `pkgutil.find_loader()` (removed in Python 3.12)
 - Dependency on the `six` package for Python 2/3 compatibility
 
-This fork removes all Python 2 compatibility code and modernizes the package for Python 3.12+.
+This fork removes all Python 2 compatibility code and modernizes the package for Python 3.9+.
 
 ## Installation
 
@@ -51,7 +58,7 @@ dependencies = [
 
 ## Changes from original bson
 
-- **Python 3.12+ only** - Dropped Python 2.x and early Python 3.x support
+- **Python 3.9+ only** - Dropped Python 2.x and early Python 3.x support
 - **Removed `six` dependency** - No longer needed for Python 2/3 compatibility
 - **Modern packaging** - Uses `pyproject.toml` and `hatchling`
 - **Fixed build system** - No longer uses deprecated `pkgutil.find_loader()`
