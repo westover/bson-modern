@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.12', '3.13']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package
+        run: pip install -e .
+
+      - name: Run tests
+        run: |
+          python -c "
+          import bson
+
+          # Test basic encode/decode
+          data = {'name': 'Alice', 'age': 30, 'active': True, 'score': 95.5}
+          encoded = bson.dumps(data)
+          decoded = bson.loads(encoded)
+          assert decoded == data, 'Basic test failed'
+
+          # Test ObjectId
+          from bson import ObjectId
+          oid = ObjectId()
+          assert ObjectId.is_valid(str(oid)), 'ObjectId validation failed'
+
+          # Test from hex string
+          oid2 = ObjectId(str(oid))
+          assert oid == oid2, 'ObjectId from hex failed'
+
+          print('All tests passed!')
+          "
